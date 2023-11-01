@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Pokemons.Entities;
 using Pokemons.Entities.Enums;
 using Pokemons.Exceptions;

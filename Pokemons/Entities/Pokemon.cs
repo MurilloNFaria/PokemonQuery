@@ -40,7 +40,10 @@ namespace Pokemons.Entities
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5577be3af74483be2ba0e3a3bbfe5915eb353f45
             sb.Append("Number #");
             sb.Append(Number);
             sb.AppendLine();
