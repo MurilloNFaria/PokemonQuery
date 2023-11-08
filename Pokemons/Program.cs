@@ -2,6 +2,7 @@
 using Pokemons.Entities;
 using Pokemons.Entities.Enums;
 using Pokemons.Exceptions;
+using Pokemons.Services;
 
 namespace Pokemons
 {
@@ -15,7 +16,8 @@ namespace Pokemons
             {
                 try
                 {
-                    dataManipulation.ReadArchive();
+                    if (dataManipulation.pokemonList.Count <= 0)
+                        dataManipulation.ReadArchive();
                     dataManipulation.Processes.SelectionProcess(dataManipulation.Screen.Select());
                 }
                 catch (Exception ex)

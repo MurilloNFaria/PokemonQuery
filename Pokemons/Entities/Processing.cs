@@ -1,132 +1,72 @@
 ﻿using Pokemons.Entities.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Pokemons.Services;
 
 namespace Pokemons.Entities
 {
     internal class Processing
     {
         public DataManipulation Data { get; set; }
+        public FilterService Filter { get; set; }
+        public ScreenPrint Screen { get; set; }
 
         public Processing(DataManipulation data)
         {
             Data = data;
+            Filter = new FilterService();
+            Screen = new ScreenPrint();
         }
 
         public void SelectionProcess(int n)
         {
             if (n == 1)
             {
-                Console.Clear();
-                Console.Write("Write the pokemon type: ");
+                Screen.SelectProcessInit(n);
                 string[] types = Console.ReadLine().Split(',');
-                Console.Clear();
 
-                Console.WriteLine("Search results:");
-                Console.WriteLine();
-                foreach (Pokemon p in Data.pokemonList)
-                {
-                    TypeProcess(p, types);
-                }
+                Filter = new FilterService(new TypeFilterService(Data, types));
 
-                Console.Write("Press (ENTER) to go back to the menu");
-                Console.ReadLine();
+                Screen.SelectProcessFinal(n, Data, Filter._filterService);
             }
-
-            if (n == 2)
+            else if (n == 2)
             {
-                Console.Clear();
-                Console.Write("Write the pokemon name: ");
+                Screen.SelectProcessInit(n);
                 string name = Console.ReadLine();
-                Console.Clear();
 
-                Console.WriteLine("Search results:");
-                Console.WriteLine();
-                foreach (Pokemon p in Data.pokemonList)
-                {
-                    if (p.Name == name)
-                        Console.WriteLine(p);
-                }
+                Filter = new FilterService(new NameFilterService(Data, name));
 
-                Console.Write("Press (ENTER) to go back to the menu");
-                Console.ReadLine();
+                Screen.SelectProcessFinal(n, Data, Filter._filterService);
             }
-            if (n == 3)
+            else if (n == 3)
             {
-                Console.Clear();
-                Console.Write("Write the pokemon number: ");
+                Screen.SelectProcessInit(n);
                 int number = int.Parse(Console.ReadLine());
-                Console.Clear();
 
-                Console.WriteLine("Search results:");
-                Console.WriteLine();
-                foreach (Pokemon p in Data.pokemonList)
-                {
-                    if (p.Number == number)
-                        Console.WriteLine(p);
-                }
+                Filter = new FilterService(new NumberFilterService(Data, number));
 
-                Console.Write("Press (ENTER) to go back to the menu");
-                Console.ReadLine();
+                Screen.SelectProcessFinal(n, Data, Filter._filterService);
             }
-            if (n == 4)
+            else if (n == 4)
             {
-                Console.Clear();
-                Console.Write("Write the pokemon number: ");
+                Screen.SelectProcessInit(n);
                 int generation = int.Parse(Console.ReadLine());
-                Console.Clear();
 
-                Console.WriteLine("Search results:");
-                Console.WriteLine();
-                foreach (Pokemon p in Data.pokemonList)
-                {
-                    if (p.Generation == generation)
-                        Console.WriteLine(p);
-                }
+                Filter = new FilterService(new GenerationFilterService(Data, generation));
 
-                Console.Write("Press (ENTER) to go back to the menu");
-                Console.ReadLine();
+                Screen.SelectProcessFinal(n, Data, Filter._filterService);
             }
-            if (n == 5)
+            else if (n == 5)
             {
                 Console.Clear();
+                Filter = new FilterService(new LegendaryFilterService(Data));
 
-                Console.WriteLine("Search results:");
-                Console.WriteLine();
-                foreach (Pokemon p in Data.pokemonList)
-                {
-                    if (p.Legendary)
-                        Console.WriteLine(p);
-                }
-
-                Console.Write("Press (ENTER) to go back to the menu");
-                Console.ReadLine();
+                Screen.SelectProcessFinal(n, Data, Filter._filterService);
             }
-            if (n == 6)
+            else
             {
                 Data.Execution = false;
                 Console.WriteLine();
                 Console.WriteLine("Program ended, thanks!");
-            }
-
-        }
-
-        private void TypeProcess(Pokemon p, string[] types)
-        {
-            if (types.Length > 1)
-            {
-                if (p.Type1 == Enum.Parse<PokeType>(types[0]) && p.Type2 == Enum.Parse<PokeType>(types[1]))
-                    Console.WriteLine(p);
-                if (p.Type1 == Enum.Parse<PokeType>(types[1]) && p.Type2 == Enum.Parse<PokeType>(types[0]))
-                    Console.WriteLine(p);
-            }
-            else
-            {
-                if (p.Type1 == Enum.Parse<PokeType>(types[0]) || p.Type2 == Enum.Parse<PokeType>(types[0]))
-                    Console.WriteLine(p);
+                Console.WriteLine("By: Murillo Faria");
             }
         }
     }

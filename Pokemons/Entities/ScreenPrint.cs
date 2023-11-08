@@ -1,14 +1,11 @@
 ﻿using Pokemons.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Pokemons.Services;
 
 namespace Pokemons.Entities
 {
     internal class ScreenPrint
     {
+
         public int Select()
         {
             Console.Clear();
@@ -20,12 +17,40 @@ namespace Pokemons.Entities
             Console.WriteLine("5 - Show only legendaries;");
             Console.WriteLine("6 - End program");
             Console.Write("Choose one (1/2/3/4/5/6): ");
-                int n = int.Parse(Console.ReadLine());
-            if (n < 1 || n > 6) 
+            int n = int.Parse(Console.ReadLine());
+            if (n < 1 || n > 6)
             {
                 throw new SelectException("The number entered must be among the options above");
             }
             return n;
+        }
+
+        public void SelectProcessInit(int n)
+        {
+            string print = null;
+            if (n == 1)
+                print = "type";
+            if (n == 2)
+                print = "name";
+            if (n == 3)
+                print = "number";
+            if (n == 4)
+                print = "generation";
+
+            Console.Clear();
+            Console.Write($"Write the pokemon {print}: ");
+        }
+
+        public void SelectProcessFinal(int n, DataManipulation data, IFilterService filter)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Search results:");
+            Console.WriteLine();
+            filter.Filter();
+
+            Console.Write("Press (ENTER) to go back to the menu");
+            Console.ReadLine();
         }
     }
 }
