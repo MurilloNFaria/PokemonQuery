@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Pokemons.Exceptions;
 
-namespace Pokemons.Exceptions
+internal class SelectException : ApplicationException
 {
-    internal class SelectException : ApplicationException
-    {
-        public SelectException(string message) : base(message) { }
-    }
+    public SelectException(string message) : base(message) { }
 }

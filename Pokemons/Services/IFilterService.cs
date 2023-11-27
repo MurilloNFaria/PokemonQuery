@@ -1,10 +1,9 @@
 ﻿using System;
 using Pokemons.Entities;
 
-namespace Pokemons.Services
+namespace Pokemons.Services;
+
+interface IFilterService
 {
-    interface IFilterService
-    {
-        void Filter();
-    }
+    void Filter();
 }

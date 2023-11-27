@@ -1,23 +1,22 @@
 ﻿using Pokemons.Entities;
 
-namespace Pokemons.Services
+namespace Pokemons.Services;
+
+internal class LegendaryFilterService : IFilterService
 {
-    internal class LegendaryFilterService : IFilterService
+    public DataManipulation Data { get; set; }
+
+    public LegendaryFilterService(DataManipulation data)
     {
-        public DataManipulation Data { get; set; }
+        Data = data;
+    }
 
-        public LegendaryFilterService(DataManipulation data)
+    public void Filter()
+    {
+        foreach (Pokemon p in Data.pokemonList)
         {
-            Data = data;
-        }
-
-        public void Filter()
-        {
-            foreach (Pokemon p in Data.pokemonList)
-            {
-                if (p.Legendary)
-                    Console.WriteLine(p);
-            }
+            if (p.Legendary)
+                Console.WriteLine(p);
         }
     }
 }
