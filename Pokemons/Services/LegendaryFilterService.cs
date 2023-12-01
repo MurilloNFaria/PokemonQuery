@@ -13,10 +13,11 @@ internal class LegendaryFilterService : IFilterService
 
     public void Filter()
     {
-        foreach (Pokemon p in Data.pokemonList)
+        IEnumerable<Pokemon> list = Data.pokemonList.Where(x => x.Legendary).OrderBy(x => x.Name);
+
+        foreach (Pokemon p in list)
         {
-            if (p.Legendary)
-                Console.WriteLine(p);
+            Console.WriteLine(p);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Pokemons.Entities.Enums;
 using Pokemons.Exceptions;
 using Pokemons.Services;
+
 namespace Pokemons;
 
 class Program
@@ -14,7 +15,8 @@ class Program
         {
             try
             {
-                if (dataManipulation.pokemonList.Count <= 0) dataManipulation.ReadArchive();
+                if (dataManipulation.VerifyLenght()) 
+                    dataManipulation.ReadArchive();
                 dataManipulation.Processes.SelectionProcess(ScreenPrint.Select());
             }
             catch (Exception ex)

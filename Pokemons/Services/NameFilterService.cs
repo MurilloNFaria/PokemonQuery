@@ -7,17 +7,19 @@ internal class NameFilterService : IFilterService
     public DataManipulation Data { get; set; }
     public string Name { get; set; }
 
-    public NameFilterService(DataManipulation data, string name) {
+    public NameFilterService(DataManipulation data, string name)
+    {
         Data = data;
         Name = name;
     }
 
     public void Filter()
     {
-        foreach (Pokemon p in Data.pokemonList)
+        IEnumerable<Pokemon> list = Data.pokemonList.Where(x => x.Name.Contains(Name)).OrderBy(x => x.Name);
+
+        foreach (Pokemon p in list)
         {
-            if (p.Name == Name)
-                Console.WriteLine(p);
+            Console.WriteLine(p);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Pokemons.Services;
 
 internal class FilterService
 {
-    public IFilterService _filterService { get; set; }
+    public static IFilterService _filterService { get; set; }
 
     public FilterService(IFilterService filterService)
     {

@@ -15,9 +15,10 @@ internal class NumberFilterService : IFilterService
 
     public void Filter()
     {
-        foreach (Pokemon p in Data.pokemonList)
+        IEnumerable<Pokemon> list = Data.pokemonList.Where(x => x.Number == Number).OrderBy(x => x.Name);
+
+        foreach (Pokemon p in list)
         {
-            if (p.Number == Number)
                 Console.WriteLine(p);
         }
     }

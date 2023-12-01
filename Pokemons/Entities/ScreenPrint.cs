@@ -37,7 +37,7 @@ internal class ScreenPrint
         Console.Write($"Write the pokemon {print}: ");
     }
 
-    public static void SelectProcessFinal(int n, DataManipulation data, IFilterService filter)
+    public static void SelectProcessFinal(IFilterService filter)
     {
         Console.Clear();
 
